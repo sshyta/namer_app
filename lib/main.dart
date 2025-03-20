@@ -47,7 +47,6 @@ class MyHomePage extends StatelessWidget {
         children: [
           Text('Param pam-pam'),
           BigCard(pair: pair),
-
           ElevatedButton(
             onPressed: () {
               appState.getNex();
@@ -61,15 +60,24 @@ class MyHomePage extends StatelessWidget {
 }
 
 class BigCard extends StatelessWidget {
+
+
   const BigCard({super.key, required this.pair});
 
   final WordPair pair;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(pair.asLowerCase),
+
+  var theme =Theme.of(context);
+
+
+    return Card(
+      
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text(pair.asLowerCase),
+      ),
     );
   }
 }
