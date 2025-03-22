@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 74, 34, 255),
+            seedColor: const Color.fromARGB(255, 4, 0, 255),
           ),
         ),
         home: MyHomePage(),
@@ -37,23 +37,27 @@ class MyAppState extends ChangeNotifier {
 }
 
 class MyHomePage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
     var pair = appState.current;
 
     return Scaffold(
-      body: Column(
-        children: [
-          Text('Param pam-pam'),
-          BigCard(pair: pair),
-          ElevatedButton(
-            onPressed: () {
-              appState.getNex();
-            },
-            child: Text('Next'),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Param pam-pam'),
+            BigCard(pair: pair),
+            ElevatedButton(
+              onPressed: () {
+                appState.getNex();
+              },
+              child: Text('Next'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -61,22 +65,25 @@ class MyHomePage extends StatelessWidget {
 
 class BigCard extends StatelessWidget {
 
-
-  const BigCard({super.key, required this.pair});
-
   final WordPair pair;
+  const BigCard({super.key, required this.pair});
 
   @override
   Widget build(BuildContext context) {
-
-  var theme =Theme.of(context);
-
+    var theme = Theme.of(context);
+    var style = theme.textTheme.displayMedium!.copyWith(
+      color: theme.colorScheme.onPrimary,
+    );
 
     return Card(
-      
+      color: theme.colorScheme.primary,
       child: Padding(
         padding: const EdgeInsets.all(20),
-        child: Text(pair.asLowerCase),
+        child: Text(
+          pair.asLowerCase, 
+          style: style,
+          semanticsLabel: pair.asPascalCase,
+          ),
       ),
     );
   }
